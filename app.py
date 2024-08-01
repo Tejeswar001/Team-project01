@@ -21,7 +21,7 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route('/totalexpenses/<int:id>',methods=['GET'])
 def total_expenses(id):
