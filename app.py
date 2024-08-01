@@ -26,6 +26,10 @@ def index():
 @app.route('/totalexpenses/<int:id>',methods=['GET'])
 def total_expenses(id):
     pass
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
     
 
 if __name__ == "__main__":

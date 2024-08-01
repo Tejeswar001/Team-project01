@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<!-- Main Container -->
+<main class="main-container">
+    <!-- Info Section -->
+    <section class="info-section">
+
+      <h1> Expenses Management Tool</h1>
+      <p> A web application designed to help users track their income, expenses, and savings.
+         Users can categorize expenses, set budgets, and generate detailed reports to gain insights into their spending habits.</p>
+    </section>
+    <section class="form-section">
+      <!-- Form -->
+      <form class="main-form">
+        <!-- Username-->
+        <div class="input-field">
+          <input class="first-name" id="first-name" type="text" placeholder="First Name">
+          <div class="first-name-error"></div>
+          <label for="first-name" class="name-label"></label>
+        </div>
+        <!-- Lastname -->
+        <div class="input-field">
+          <input class="last-name" type="text" placeholder="Last Name">
+          <div class="last-name-error"></div>
+          <label for="last-name" class="lastname-label"></label>
+        </div>
+        <!-- Email -->
+        <div class="input-field">
+          <input class="user-email" type="email" placeholder="Email Address">
+          <div class="user-email-error"></div>
+          <label for="user-email" class="email-label"></label>
+        </div>
+        <!-- Password -->
+        <div class="input-field">
+          <input class="user-pass" type="password" placeholder="Password">
+          <div class="user-pass-error"></div>
+          <label for="user-pass" class="pass-label"></label>
+        </div>
+        <div class="input-field">
+
+          <button class="submit-info" id="submit-info" type="submit">Signup for Free</button>
+          <label for="submit-info" class="success-msg"></label>
+        </div>
+        <label class="tnc" for="submit-info"> By clicking the button, you are agreeing to our <a href="">Terms and
+            Services</a>
+        </label>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+{% endblock %}
