@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
     
 class expenses(db.Model):
     cid = db.Column(db.Integer, primary_key=True)
-    cat = db.column(db.String(200))
+    cat = db.Column(db.String(200),nullable=True)
     date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     amount = db.Column(db.Integer, nullable=False)
 
