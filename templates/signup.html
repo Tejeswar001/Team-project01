@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<title>Signup</title>
 {% endblock %}
 
 {% block body %}
@@ -15,28 +16,28 @@
     </section>
     <section class="form-section">
       <!-- Form -->
-      <form class="main-form">
+      <form class="main-form" action="{{ url_for('signup') }}" method="POST">
         <!-- Username-->
         <div class="input-field">
-          <input class="first-name" id="first-name" type="text" placeholder="First Name">
+          <input class="first-name" id="first-name" type="text" placeholder="First Name" name="first_name" required>
           <div class="first-name-error"></div>
           <label for="first-name" class="name-label"></label>
         </div>
         <!-- Lastname -->
         <div class="input-field">
-          <input class="last-name" type="text" placeholder="Last Name">
+          <input class="last-name" name="last_name" type="text" placeholder="Last Name" required>
           <div class="last-name-error"></div>
           <label for="last-name" class="lastname-label"></label>
         </div>
         <!-- Email -->
         <div class="input-field">
-          <input class="user-email" type="email" placeholder="Email Address">
+          <input class="user-email" type="email" name="email" placeholder="Email Address" required>
           <div class="user-email-error"></div>
           <label for="user-email" class="email-label"></label>
         </div>
         <!-- Password -->
         <div class="input-field">
-          <input class="user-pass" type="password" placeholder="Password">
+          <input class="user-pass" type="password" placeholder="Password" name="password" required>
           <div class="user-pass-error"></div>
           <label for="user-pass" class="pass-label"></label>
         </div>

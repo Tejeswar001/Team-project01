@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime,timezone
 
@@ -7,14 +7,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Tejeswar2006@local
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
     
-class expenses(db.Model):
+class users(db.Model):
     cid = db.Column(db.Integer, primary_key=True)
-    cat = db.Column(db.String(200),nullable=True)
-    date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    amount = db.Column(db.Integer, nullable=False)
+    first_name = db.Column(db.String(200),nullable=False)
+    last_name = db.Column(db.String(200),nullable=False)
+    email = db.Column(db.String(50),unique=True)
+    password = db.Column(db.String(20),nullable=False)
 
     def __repr__(self):
-        return '<Expenses %r>' % self.cid
+        return '<users %r>' % self.cid
 
 with app.app_context():
     db.create_all()
@@ -25,12 +26,37 @@ def index():
 
 @app.route('/totalexpenses/<int:id>',methods=['GET'])
 def total_expenses(id):
-    pass
+    return render_template('index.html')
 
-@app.route('/signup')
-def signup():
+@app.route('/direct_signup')
+def direct_signup():
     return render_template('signup.html')
     
+@app.route('/signup',methods=['POST','GET'])
+def signup():
+    if request.method=='POST':
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        email = request.form['email']
+        password = request.form['password']
 
+        try:
+            new_user = users(first_name=first_name,last_name=last_name,email=email,password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        except:
+            redirect(url_for('index'))
+
+    return render_template('signup.html')
+
+@app.route('/login',methods=['POST'])
+def login():
+    email = request.form['email']
+    password = request.form['password']
+    user = users.query.filter_by(email=email).first()
+    if user:
+        return redirect(url_for('total_expenses',id=user.cid))
+    return redirect(url_for('index'))
 if __name__ == "__main__":
     app.run(debug=True)
