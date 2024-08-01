@@ -44,9 +44,9 @@ def signup():
             new_user = users(first_name=first_name,last_name=last_name,email=email,password=password)
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('total_expenses')) 
         except:
-            redirect(url_for('index'))
+            redirect(url_for('index'))# redirecting to login page 
 
     return render_template('signup.html')
 
@@ -57,6 +57,7 @@ def login():
     user = users.query.filter_by(email=email).first()
     if user:
         return redirect(url_for('total_expenses',id=user.cid))
-    return redirect(url_for('index'))
+    return redirect(url_for('index'))# if user does'nt exists
+
 if __name__ == "__main__":
     app.run(debug=True)
