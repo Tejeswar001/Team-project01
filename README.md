@@ -97,3 +97,4 @@ A web application designed to help users track their income, expenses, and savin
 #### 12. Documentation
 - **User Guide:** Create a user guide to help users understand how to use the application.
 - **Technical Documentation:** Document the codebase and architecture for future reference.
+- 
