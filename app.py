@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime,timezone
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'TeamHeadstarter'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Tejeswar2006@localhost/expenses_tool'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
