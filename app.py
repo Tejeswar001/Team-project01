@@ -1,10 +1,10 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime,timezone
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'TeamHeadstarter'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Tejeswar2006@localhost/expenses_tool'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Tejeswar001@localhost/expenses_tool'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
     
@@ -45,20 +45,27 @@ def signup():
             new_user = users(first_name=first_name,last_name=last_name,email=email,password=password)
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('total_expenses')) 
+            return redirect(url_for('total_expenses',id=new_user.id)) 
         except:
+            db.session.rollback()  # Rollback the session in case of error
             redirect(url_for('index'))# redirecting to login page 
 
     return render_template('signup.html')
 
-@app.route('/login',methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     email = request.form['email']
     password = request.form['password']
     user = users.query.filter_by(email=email).first()
     if user:
-        return redirect(url_for('total_expenses',id=user.cid))
-    return redirect(url_for('index'))# if user does'nt exists
+        if user.password == password:
+            return redirect(url_for('total_expenses', id=user.cid))
+        else:
+            flash('Enter a valid Password!!','error')
+            return redirect(url_for('index'))
+    else:
+        flash('Email not found. Sign up.','error')
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)
