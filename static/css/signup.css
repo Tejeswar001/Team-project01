@@ -198,7 +198,7 @@ input:focus-visible {
   }
   .main-container {
     grid-template-columns: 1fr;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
   }
   .info-section {
     text-align: center;

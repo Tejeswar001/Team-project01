@@ -7,6 +7,15 @@
 <div class="wrapper">
     <header>Login Form</header>
     <form action="{{ url_for('login') }}" method="POST" >
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{category}}">{{message}}</li>
+                    {% endfor %}
+                    </ul>
+            {% endif %}
+        {% endwith %}
         <div class="field email">
             <div class="input-area">
                 <input type="text" placeholder="Email Address" name="email" required>
@@ -30,4 +39,4 @@
 </div>
 
 <script src="script.js"></script>
-{% endblock %}
+{% endblock %}\
